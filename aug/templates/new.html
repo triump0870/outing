@@ -70,12 +70,14 @@
                 <p>Don't worry we have pick up arrangements for you. Just fill the form below and we'll be there for you.</p>
                 <form method="post" action="">
                 {% csrf_token %}
+                    {% for field in form %}
                     <div class="row control-group">
                         <div class="form-group col-xs-12  controls">
-                            {{form.name|bootstrap}}
+                            {{field|bootstrap}}
                         </div>
                     </div>
-                    <div class="row control-group">
+                    {% endfor %}
+                    <!-- <div class="row control-group">
                         <div class="form-group col-xs-12 controls">
                             {{form.email|bootstrap}}
                         </div>
@@ -99,7 +101,7 @@
                         <div class="form-group col-xs-12  controls">
                            {{form.comments|bootstrap}}
                         </div>
-                    </div>
+                    </div> -->
                     <br>
                     <div id="success"></div>
                     <div class="row">
