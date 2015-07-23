@@ -1,0 +1,13 @@
+{% load static from staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Ericsson OSS ASSURANCE Team Outing</title>
+	<!-- <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/main.css"> -->
+	<link rel="stylesheet" href="{% static 'plugins/bootstrap/css/bootstrap.min.css' %}">
+	{% block style %}{% endblock %}
+</head>
+<body>
+{% block content %}{% endblock %}
+</body>
+</html>
