@@ -13,7 +13,27 @@
 <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $('#id_pickUpPlace').hide();
+        $('#id_southPickUpPlace').hide();
+        $('#id_region').change(function(){
+                if($(this).val()=='South'){
+                    $('#id_pickUpPlace').hide();
+                    $('#id_southPickUpPlace').show('slow');
+                }
+                else if($(this).val()=='North'){
+                    $('#id_southPickUpPlace').hide('slow');
+                    $('#id_pickUpPlace').show('slow');
+                }
+                else {
+                    $('#id_pickUpPlace').hide();
+                    $('#id_southPickUpPlace').hide();
+                }
+        });
+    });
+</script>
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>CClealea
@@ -70,14 +90,17 @@
                 <p>Don't worry we have pick up arrangements for you. Just fill the form below and we'll be there for you.</p>
                 <form method="post" action="">
                 {% csrf_token %}
-                    {% for field in form %}
                     <div class="row control-group">
                         <div class="form-group col-xs-12  controls">
-                            {{field|bootstrap}}
+                            {{form.name|bootstrap}}
                         </div>
                     </div>
-                    {% endfor %}
-                    <!-- <div class="row control-group">
+                   <div class="row control-group">
+                        <div class="form-group col-xs-12  controls">
+                            {{form.signum|bootstrap}}
+                        </div>
+                    </div>
+                    <div class="row control-group">
                         <div class="form-group col-xs-12 controls">
                             {{form.email|bootstrap}}
                         </div>
@@ -92,16 +115,21 @@
                            {{form.region|bootstrap}}
                         </div>
                     </div>
-                    <div class="row control-group">
+                    <div class="row control-group" id='id_pickUpPlace'>
                         <div class="form-group col-xs-12  controls">
-                           {{form.pickUpPlace|bootstrap}}
+                           {{form.northPickUpPlace|bootstrap}}
+                        </div>
+                    </div>
+                    <div class="row control-group" id='id_southPickUpPlace'>
+                        <div class="form-group col-xs-12  controls">
+                           {{form.southPickUpPlace|bootstrap}}
                         </div>
                     </div>
                     <div class="row control-group">
                         <div class="form-group col-xs-12  controls">
                            {{form.comments|bootstrap}}
                         </div>
-                    </div> -->
+                    </div>
                     <br>
                     <div id="success"></div>
                     <div class="row">

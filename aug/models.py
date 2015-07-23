@@ -7,7 +7,13 @@ REGION_CHOICE = (
 	('South','South'),
 	('North','North'),
 )
-class PlaceChoice(models.Model):
+class NorthPlaceChoice(models.Model):
+	place = models.CharField(max_length=30)
+
+	def __unicode__(self):
+		return self.place
+
+class SouthPlaceChoice(models.Model):
 	place = models.CharField(max_length=30)
 
 	def __unicode__(self):
@@ -24,7 +30,8 @@ class User(models.Model):
 	phone_regex = RegexValidator(regex=r'^\d{10}$', message="Phone number must be entered in the format: '9012345678'. Up to 10 digits allowed.")
 	phone_number = models.CharField(max_length=10, validators=[phone_regex], blank=False, null=False) # validators should be a list
 	region = models.CharField(max_length=10,blank=False, null=False, choices=REGION_CHOICE)	
-	pickUpPlace = models.ForeignKey(PlaceChoice)
+	northPickUpPlace = models.ForeignKey(NorthPlaceChoice,verbose_name='PickUpPlace',related_name='PickUpPlace')
+	southPickUpPlace = models.ForeignKey(SouthPlaceChoice, verbose_name='PickUpPlace')
 	comments = models.TextField(verbose_name='Comments (Optional)',blank=True, null=True)
 
 	def __unicode__(self):
